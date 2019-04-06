@@ -1,0 +1,61 @@
+-- Topic Ranking of Documents
+- each document can have MULTIPLE relevant topics
+
+- given: stream of documents
+		 a predefined set of topics: Y ; |Y| = k 
+		 each has 0 or more topics associated with it
+
+- Reuters 2000, k = 103
+  Reuters 21578, k = 91
+
+- there are semantic overlaps b/w topics
+Hence, one doc is associated with >1 topic
+
+- a doc is labeled with a set 'y' of relevant topics; y is a subset of Y
+
+- Reuters 2000, avg y = 3.2
+  Reuters 21578, avg y = 1.24
+
+- a topic/class/category 'r' is `relevant` for a given doc, if r belongs to y.
+
+- Topic ranking algorithms return a list of topics ranked a/c to their relevance.
+
+- Feedback for each doc is set 'y'
+	-- also set of relevant topics y
+
+- Topic ranking v/s Feedback:
+Topic ranking algo outputs total ordering of the topics
+Feedback is a coarse partial ordering into two sets
+
+
+----------------
+
+- Representation
+- Document x_bar: 
+	using vector space model as a vector in R^n
+
+	so a doc is denoted by its vector representation x_bar belongs to R^n.
+
+- Prototypes w1_bar, w2_bar.. Wk_bar
+	each prototype is denoted by its vector representation wr_bar belongs to R^n.	
+
+- vector space representation is based on Pivoted Length Normalization.
+
+- algos in this paper construct prototype vectors from examples.
+--> from a corpus S containing T docs, each of which is associated with a set of relevant topics, 
+S = {(x^-t, y^t) | 1<= t<= T,
+					x^-t belongs to R^n,
+					y^t is a subset of Y}.
+
+- this S induces a ranking on topics a/c to their similarity to vector rep of doc
+
+--> inner products of prototype wi_bar and x_bar induce an ordering a/c to relevance level of each topic.
+
+--> if wr_bar.x_bar > ws_bar.x_bar => topic r is ranked higher than s
+
+- Perfect Ranking
+--> for any pair of topics r and s, st r belongs to y but s does not belong to y, relevance score induced by r is more than that induced by s.
+
+- Quality of Perfect Topic Ranking:
+--> margin: size of gap b/w the lowest score among relevant topics to the highest score among non relevant topics
+
